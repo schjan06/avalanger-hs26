@@ -3,11 +3,11 @@ package ch.zhaw.avalanger.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.annotation.RequestScope;
 
 import ch.zhaw.avalanger.model.Avalange;
 import ch.zhaw.avalanger.model.AvalangeCreateDTO;
 import ch.zhaw.avalanger.model.AvalangeState;
+import ch.zhaw.avalanger.model.AvalangeStateAggregation;
 import ch.zhaw.avalanger.repository.AvalangeRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -44,4 +44,10 @@ public class AvalangeController {
         Avalange savedAvalange = avalangeRepository.save(avalangeToSave);
         return ResponseEntity.ok(savedAvalange);
     }
+
+    @GetMapping("/states")
+    public ResponseEntity<List<AvalangeStateAggregation>> getAvalangeStates() {
+        return ResponseEntity.ok(avalangeRepository.findAvalangeStates());
+    }
+
 }
